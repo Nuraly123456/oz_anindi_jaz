@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Oz anindi jaz — Saryagash дауыс жазу студиясы</title>
+  <meta name="description" content="Saryagash: кәсіби дауыс жазу студиясы — жазу, өңдеу, дубляж, подкаст. Бір файл: index.html" />
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#ffb86b; --muted:#9aa4b2; --glass: rgba(255,255,255,0.04);
+      --radius:14px; --maxw:1100px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --shadow: 0 8px 30px rgba(2,6,23,0.6);
+      --btn-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      --transition: all 0.3s ease;
+    }
+
+    html,body{height:100%;margin:0;padding:0;overflow-x:hidden;}
+    body{
+      background:linear-gradient(180deg,#071226 0%, #071a2b 100%);
+      color:#e6eef6; -webkit-font-smoothing:antialiased; line-height:1.35;
+      display:flex; align-items:flex-start; justify-content:center;
+      padding:12px;
+      transition: var(--transition);
+      min-height:100vh;
+    }
+    body.light-mode {
+      background:linear-gradient(180deg,#e6eef6 0%, #d0dce8 100%); color:#0f1724;
+      --bg: #f0f5fa; --card: #ffffff; --accent: #ff7e29; --muted: #64748b; --glass: rgba(0,0,0,0.03);
+      --shadow: 0 8px 30px rgba(0,0,0,0.08);
+      --btn-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .wrap{width:100%; max-width:var(--maxw);}
+
+    /* --- HEADER --- */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+      gap:12px;
+      position:sticky;
+      top:0;
+      background:linear-gradient(180deg,rgba(15,23,36,0.9),rgba(15,23,36,0.3));
+      backdrop-filter: blur(8px);
+      padding:10px 0;
+      z-index:100;
+    }
+    body.light-mode header{
+      background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.5));
+    }
+
+    .brand{display:flex;gap:12px;align-items:center;flex:1;min-width:0;}
+    .logo{
+      width:56px; height:56px; border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),#ff7aa2);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; color:#061224;
+      box-shadow:0 4px 14px rgba(0,0,0,0.4);
+      overflow:hidden;
+    }
+    .logo-img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:inherit;
+    }
+    h1{margin:0;font-size:20px;white-space:nowrap;}
+    header p{margin:0;color:var(--muted);font-size:13px;}
+
+    @media (max-width:640px){
+      header{flex-direction:column;align-items:flex-start;padding:8px 0 12px;}
+      .brand{gap:8px;}
+      .logo{width:48px;height:48px;}
+      h1{font-size:18px;}
+      header p{font-size:12px;}
+      body{padding:8px;}
+    }
+    @media (max-width:400px){
+      .logo{width:42px;height:42px;}
+      h1{font-size:16px;}
+      .tag{font-size:11px;padding:4px 6px;}
+    }
+    body.light-mode .logo {
+      background:linear-gradient(135deg,#ffb86b,#ff7aa2);
+      box-shadow:0 4px 14px rgba(0,0,0,0.1);
+    }
+
+    /* --- REST OF YOUR ORIGINAL CSS (unchanged) --- */
+    .grid{display:grid;grid-template-columns:1fr 420px;gap:26px;align-items:start}
+    @media (max-width:960px){.grid{grid-template-columns:1fr;gap:20px;}.wrap{padding:0 12px}}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);transition:var(--transition);}
+    body.light-mode .card{background:var(--card);}
+    .hero-title{font-size:28px;margin:0 0 8px}
+    .hero-sub{color:var(--muted);margin:0 0 18px}
+    .features{display:flex;gap:12px;flex-wrap:wrap}
+    .feat{background:var(--glass);padding:10px 12px;border-radius:10px;font-size:14px;color:var(--muted);transition:var(--transition);}
+    .cta-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;}
+    .btn{border:0;padding:12px 16px;border-radius:12px;background:transparent;color:var(--accent);cursor:pointer;font-weight:600;transition:var(--transition);box-shadow:var(--btn-shadow);font-size:14px;min-height:44px;display:flex;align-items:center;justify-content:center;}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#ff7aa2);color:#061224;box-shadow:0 8px 24px rgba(255,138,96,0.12)}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.4);}
+    body.light-mode .btn:hover{box-shadow:0 6px 16px rgba(0,0,0,0.15);}
+    .btn.whatsapp{background:linear-gradient(90deg,#25D366,#128C7E);color:white;}
+    .recorder{display:flex;flex-direction:column;gap:12px}
+    .meter{height:72px;background:linear-gradient(180deg,#051024,#08152b);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;transition:var(--transition);}
+    body.light-mode .meter{background:linear-gradient(180deg,#e2e8f0,#cbd5e1);}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+    .controls .btn{flex:1;min-width:70px;text-align:center;padding:10px 8px;font-size:13px;}
+    .small{font-size:13px;color:var(--muted)}
+    .list{display:grid;gap:10px;margin-top:12px}
+    .service{display:flex;justify-content:space-between;align-items:center;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);transition:var(--transition);}
+    body.light-mode .service{background:rgba(0,0,0,0.02);}
+    footer{margin-top:18px;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;flex-wrap:wrap;gap:8px;}
+    form{display:flex;flex-direction:column;gap:8px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:10px;color:inherit;font-size:14px;transition:var(--transition);min-height:44px;}
+    body.light-mode input,body.light-mode textarea{border:1px solid rgba(0,0,0,0.1);}
+    input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.25)}
+    body.light-mode input::placeholder,body.light-mode textarea::placeholder{color:rgba(0,0,0,0.4);}
+    textarea{min-height:80px;}
+    .download-list{display:flex;flex-direction:column;gap:8px;margin-top:8px;max-height:200px;overflow-y:auto;padding-right:5px;}
+    .download-list::-webkit-scrollbar{width:6px;}
+    .download-list::-webkit-scrollbar-track{background:transparent;}
+    .download-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px;}
+    .download-list::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2);}
+    .clip{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:8px;border-radius:8px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));transition:var(--transition);flex-wrap:wrap;}
+    body.light-mode .clip{background:linear-gradient(90deg,rgba(0,0,0,0.02),rgba(0,0,0,0.01));}
+    .chip{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;font-size:13px;transition:var(--transition);}
+    body.light-mode .chip{background:rgba(0,0,0,0.03);}
+    .tag{font-size:12px;color:var(--muted);background:rgba(255,255,255,0.02);padding:6px;border-radius:999px;transition:var(--transition);}
+    body.light-mode .tag{background:rgba(0,0,0,0.02);}
+    .footer-note{font-size:12px;color:var(--muted)}
+    .theme-toggle{position:relative;width:60px;height:30px;border-radius:15px;background:var(--glass);cursor:pointer;display:flex;align-items:center;padding:0 4px;transition:var(--transition);}
+    .theme-toggle::before{content:'';position:absolute;width:22px;height:22px;border-radius:50%;background:var(--accent);transition:var(--transition);left:4px;}
+    body.light-mode .theme-toggle::before{left:calc(100% - 26px);}
+    .theme-toggle .icon{font-size:14px;z-index:1;}
+    .theme-toggle .sun{margin-right:auto;opacity:0;}
+    body.light-mode .theme-toggle .sun{opacity:1;}
+    .theme-toggle .moon{margin-left:auto;opacity:1;}
+    body.light-mode .theme-toggle .moon{opacity:0;}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo"><img src="./logo.jpg" class="logo-img"></div>
+        <div>
+          <h1>Oz anindi jaz</h1>
+          <p>Saryagash — дауыс жазу студиясы</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="tag">Студия | Подкаст | Дубляж</div>
+        <div class="theme-toggle" id="themeToggle">
+          <span class="icon sun">☀️</span>
+          <span class="icon moon">🌙</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2 class="hero-title">Өз әніңді жазып, кәсіби өңдеулер ал</h2>
+        <p class="hero-sub">Бір реттік жазбалардан бастап толық студиялық продакшнға дейін — Saryagash-тің сенімді дауыс жазу студиясы.</p>
+
+        <div class="features">
+          <div class="feat">Жоғары сапалы микрофон</div>
+          <div class="feat">Реал-тайм мониторинг</div>
+          <div class="feat">Жылдам өңдеу</div>
+          <div class="feat">Подкаст хостинг</div>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn primary" id="bookBtn">Брондау</button>
+          <button class="btn" id="contactBtn">Байланыс</button>
+          <button class="btn whatsapp" id="whatsappBtn">WhatsApp</button>
+        </div>
+
+        <div class="list">
+          <div class="service"><div><strong>Дауыс жазу</strong><div class="small">Монолог, жарнама, дубляж</div></div><div class="chip">30 мин</div></div>
+          <div class="service"><div><strong>Подкаст жазу</strong><div class="small">Жазу + монтаж</div></div><div class="chip">60 мин</div></div>
+          <div class="service"><div><strong>Дубляж</strong><div class="small">Бақылау + синхрон</div></div><div class="chip">келісім бойынша</div></div>
+        </div>
+
+        <footer>
+          <div class="footer-note">Saryagash, Түркістан облысы</div>
+          <div class="footer-note">Тел: +7 700 573 36 15 </div>
+        </footer>
+      </section>
+
+      <aside class="card">
+        <h3 style="margin-top:0; font-size:18px;">Live Recorder</h3>
+        <p class="small">Браузерден тікелей жазып, тыңдап, жүктеп алыңыз.</p>
+
+        <div class="recorder">
+          <div class="meter">
+            <canvas id="wave" width="320" height="50" style="width:100%;border-radius:6px;background:linear-gradient(90deg, rgba(255,255,255,0.01), transparent);"></canvas>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="small">Статус: <span id="status">Қосу керек</span></div>
+              <div class="small">Уақыт: <span id="timer">00:00</span></div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="btn" id="microBtn">Қосылу</button>
+            <button class="btn primary" id="recBtn" disabled>Жазу</button>
+            <button class="btn" id="stopBtn" disabled>Тоқтату</button>
+            <button class="btn" id="playBtn" disabled>Ойнату</button>
+          </div>
+
+          <div class="small">Формат: webm (браузер үйлесімді)</div>
+
+          <div class="download-list" id="clips"></div>
+
+          <hr style="border:none;height:1px;background:rgba(255,255,255,0.03);margin:10px 0">
+          <form id="contactForm">
+            <input id="name" placeholder="Атыңыз" />
+            <input id="phone" placeholder="Телефон немесе WhatsApp" />
+            <textarea id="note" rows="3" placeholder="Қысқаша хабар (қажет болса)"></textarea>
+            <div style="display:flex;gap:6px">
+              <button type="button" class="btn primary" id="sendBtn">Жіберу</button>
+              <button type="button" class="btn" id="clearBtn">Тазарту</button>
+            </div>
+          </form>
+        </div>
+      </aside>
+    </main>
+
+    <p style="text-align:center;color:var(--muted);margin-top:12px;font-size:11px;">© Oz anindi jaz — Saryagash. Барлық құқықтар қорғалған.</p>
+  </div>
+
+  <script>
+    // ffmpeg.wasm for MP3 conversion
+    let ffmpegLoaded = false;
+    const loadFFmpeg = async () => {
+      if (typeof FFmpeg === 'undefined') {
+        console.log("FFmpeg.wasm not available, skipping MP3 conversion");
+        return false;
+      }
+      
+      try {
+        const { FFmpeg } = await import('https://unpkg.com/@ffmpeg/ffmpeg@0.12.4/dist/ffmpeg.min.js');
+        const ffmpeg = new FFmpeg();
+        await ffmpeg.load({
+          coreURL: 'https://unpkg.com/@ffmpeg/core@0.12.2/dist/ffmpeg-core.js',
+        });
+        window.ffmpeg = ffmpeg;
+        ffmpegLoaded = true;
+        console.log("FFmpeg loaded successfully");
+        return true;
+      } catch (error) {
+        console.error("Failed to load FFmpeg:", error);
+        return false;
+      }
+    };
+
+    // Convert webm to mp3 using ffmpeg.wasm
+    const convertToMp3 = async (webmBlob) => {
+      if (!ffmpegLoaded) {
+        console.log("FFmpeg not available, returning original webm");
+        return webmBlob;
+      }
+
+      try {
+        const ffmpeg = window.ffmpeg;
+        const inputName = 'input.webm';
+        const outputName = 'output.mp3';
+        
+        await ffmpeg.writeFile(inputName, new Uint8Array(await webmBlob.arrayBuffer()));
+        await ffmpeg.exec(['-i', inputName, '-acodec', 'libmp3lame', outputName]);
+        const data = await ffmpeg.readFile(outputName);
+        const mp3Blob = new Blob([data], { type: 'audio/mp3' });
+        return mp3Blob;
+      } catch (error) {
+        console.error("Conversion failed:", error);
+        return webmBlob;
+      }
+    };
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    });
+
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-mode');
+    }
+
+    // Simple recorder using MediaRecorder + waveform with AnalyserNode
+    const microBtn = document.getElementById('microBtn');
+    const recBtn = document.getElementById('recBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const playBtn = document.getElementById('playBtn');
+    const statusEl = document.getElementById('status');
+    const timerEl = document.getElementById('timer');
+    const wave = document.getElementById('wave');
+    const clips = document.getElementById('clips');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+
+    let mediaStream = null;
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let audioURL = null;
+    let audioBlob = null;
+
+    let audioCtx, sourceNode, analyser, dataArray, rafId;
+    const canvas = wave;
+    const ctx = canvas.getContext('2d');
+
+    function updateWave(){
+      if(!analyser) return;
+      analyser.getByteTimeDomainData(dataArray);
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      const h = canvas.height;
+      for(let i=0;i<canvas.width;i++){
+        const v = dataArray[Math.floor(i * dataArray.length / canvas.width)]/128.0;
+        const y = v * h/2;
+        if(i===0) ctx.moveTo(i,y);
+        else ctx.lineTo(i,y);
+      }
+      ctx.strokeStyle = document.body.classList.contains('light-mode') ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.7)';
+      ctx.stroke();
+      rafId = requestAnimationFrame(updateWave);
+    }
+
+    microBtn.addEventListener('click', async ()=>{
+      try{
+        mediaStream = await navigator.mediaDevices.getUserMedia({audio:true});
+        statusEl.textContent = 'Микрофон: қосылды';
+        recBtn.disabled = false;
+
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        sourceNode = audioCtx.createMediaStreamSource(mediaStream);
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 512;
+        const bufferLength = analyser.fftSize;
+        dataArray = new Uint8Array(bufferLength);
+        sourceNode.connect(analyser);
+        updateWave();
+      }catch(e){
+        statusEl.textContent = 'Микрофонға рұқсат жоқ';
+        console.error(e);
+      }
+    });
+
+    recBtn.addEventListener('click', ()=>{
+      if(!mediaStream) return alert('Алдымен микрофон қосыңыз');
+      audioChunks = [];
+      mediaRecorder = new MediaRecorder(mediaStream);
+      mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+      mediaRecorder.onstart = ()=>{
+        statusEl.textContent = 'Жазып жатыр...';
+        recBtn.disabled = true; stopBtn.disabled = false; playBtn.disabled = true;
+        startTimer();
+      };
+      mediaRecorder.onstop = async ()=>{
+        audioBlob = new Blob(audioChunks, {type:'audio/webm'});
+        statusEl.textContent = 'MP3 түрлендіру...';
+        const mp3Blob = await convertToMp3(audioBlob);
+        audioURL = URL.createObjectURL(mp3Blob);
+        createClip(mp3Blob, mp3Blob.type === 'audio/mp3' ? 'mp3' : 'webm');
+        statusEl.textContent = 'Жазу аяқталды';
+        stopTimer();
+        recBtn.disabled = false; stopBtn.disabled = true; playBtn.disabled = false;
+      };
+      mediaRecorder.start();
+    });
+
+    stopBtn.addEventListener('click', ()=>{
+      if(mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.stop();
+    });
+
+    playBtn.addEventListener('click', ()=>{
+      if(!audioURL) return;
+      const a = new Audio(audioURL);
+      a.play();
+    });
+
+    // timer
+    let startTime, timerInterval;
+    function startTimer(){
+      startTime = Date.now();
+      timerInterval = setInterval(()=>{
+        const diff = Date.now()-startTime;
+        const s = Math.floor(diff/1000)%60; const m = Math.floor(diff/60000);
+        timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      },250);
+    }
+    function stopTimer(){ clearInterval(timerInterval); timerEl.textContent = '00:00'; }
+
+    function createClip(blob, format = 'webm'){
+      const url = URL.createObjectURL(blob);
+      const el = document.createElement('div'); el.className='clip';
+      const left = document.createElement('div');
+      left.innerHTML = `<div><strong>Жазба ${new Date().toLocaleTimeString()}</strong><div class="small">${Math.round(blob.size/1024)} KB (${format})</div></div>`;
+      const right = document.createElement('div');
+      right.style.display = 'flex';
+      right.style.gap = '4px';
+      right.style.flexWrap = 'wrap';
+      
+      const play = document.createElement('button'); 
+      play.className='btn'; 
+      play.textContent='Ойнату';
+      play.style.padding = '5px 6px';
+      play.style.fontSize = '11px';
+      
+      const dl = document.createElement('button'); 
+      dl.className='btn'; 
+      dl.textContent='Жүктеу';
+      dl.style.padding = '5px 6px';
+      dl.style.fontSize = '11px';
+      
+      const send = document.createElement('button'); 
+      send.className='btn whatsapp'; 
+      send.textContent='WhatsApp';
+      send.style.padding = '5px 6px';
+      send.style.fontSize = '11px';
+      
+      const del = document.createElement('button'); 
+      del.className='btn'; 
+      del.textContent='Жою';
+      del.style.padding = '5px 6px';
+      del.style.fontSize = '11px';
+      del.style.backgroundColor = 'rgba(255, 100, 100, 0.2)';
+      del.style.color = '#ff6b6b';
+      
+      play.addEventListener('click', ()=>{ const a = new Audio(url); a.play(); });
+      dl.addEventListener('click', ()=>{
+        const a = document.createElement('a'); 
+        a.href = url; 
+        a.download = `oz-anindi-jaz_${Date.now()}.${format}`; 
+        a.click();
+      });
+      send.addEventListener('click', ()=>{
+        const phone = "77005733615";
+        const message = encodeURIComponent(`Сәлеметсіз бе! Менің дауыс жазбамды жіберіп тұрмын.`);
+        const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+        window.open(whatsappUrl, '_blank');
+      });
+      del.addEventListener('click', () => {
+        el.remove();
+        URL.revokeObjectURL(url);
+      });
+      
+      right.appendChild(play); 
+      right.appendChild(dl); 
+      right.appendChild(send);
+      right.appendChild(del);
+      el.appendChild(left); 
+      el.appendChild(right);
+      clips.prepend(el);
+    }
+
+    // WhatsApp button
+    whatsappBtn.addEventListener('click', () => {
+      const phone = "77005733615";
+      const message = encodeURIComponent(`Сәлеметсіз бе! Мен Oz anindi jaz студиясынан хабарласқым келеді.`);
+      const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+      window.open(whatsappUrl, '_blank');
+    });
+
+    // contact form
+    document.getElementById('sendBtn').addEventListener('click', ()=>{
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const note = document.getElementById('note').value.trim();
+      if(!name || !phone) return alert('Атыңыз бен телефоныңызды енгізіңіз');
+      
+      const message = encodeURIComponent(`Сәлеметсіз бе! Менің атым ${name}. Телефоным: ${phone}. ${note ? `Хабар: ${note}` : ''}`);
+      const whatsappUrl = `https://wa.me/77005733615?text=${message}`;
+      window.open(whatsappUrl, '_blank');
+      
+      document.getElementById('contactForm').reset();
+    });
+    document.getElementById('clearBtn').addEventListener('click', ()=>document.getElementById('contactForm').reset());
+
+    // booking/contact buttons
+    document.getElementById('bookBtn').addEventListener('click', ()=>{
+      document.getElementById('name').focus();
+    });
+    document.getElementById('contactBtn').addEventListener('click', ()=>{
+      document.getElementById('phone').focus();
+    });
+
+    // note about secure context
+    if(location.protocol !== 'https:' && location.hostname !== 'localhost'){
+      const warn = document.createElement('div'); 
+      warn.style.cssText='position:fixed;left:8px;right:8px;bottom:8px;padding:8px;border-radius:8px;background:rgba(255,100,100,0.06);color:#fff;text-align:center;font-size:12px; z-index:1000;';
+      warn.textContent='8 700 573 36 15';
+      document.body.appendChild(warn);
+    }
+
+    // Load FFmpeg on page load
+    window.addEventListener('load', () => {
+      loadFFmpeg();
+    });
+
+    stopBtn.disabled = true; playBtn.disabled = true;
+  </script>
+</body>
+</html>

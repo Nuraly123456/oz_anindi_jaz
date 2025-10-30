@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#6C63FF">
+    <meta name="description" content="Sound Wave - Кәсіби дыбыс жазу студиясы">
+    <title>🎤 Sound Wave | Кәсіби Дыбыс Жазу Студиясы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #5a52d5;
+            --secondary: #FF6584;
+            --dark: #2A2D43;
+            --light: #F7F7FF;
+            --gray: #8C8CA1;
+            --success: #25d366;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 70px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+ .section {
+            padding: var(--padding-base);
+            text-align: center;
+            max-width: var(--desktop-max-width); /* Контентті орталықтандыру */
+            margin: 0 auto;
+        }
+
+        /* ... Басқа Стильдер (Hero, CTA, Service Card) Өзгеріссіз қалдырылады ... */
+
+        .hero-section {
+            position: relative; overflow: hidden; min-height: 70vh; 
+            display: flex; justify-content: center; align-items: center; background-color: #000; 
+        }
+        /* ... қалған Hero стилдері ... */
+        .video-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .video-background video { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+        .hero-content { position: relative; z-index: 5; text-align: center; padding: var(--padding-base); }
+        .hero-content h1, .hero-content p { color: white; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9); }
+        .tagline { color: white !important; }
+        .cta-button { display: inline-block; background-color: var(--primary-color); color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s; border: none; cursor: pointer; }
+        .cta-button:hover { background-color: #0056b3; }
+        .pricing-list { display: flex; flex-direction: column; gap: var(--padding-base); max-width: 900px; margin: 0 auto; }
+        .price-card { background-color: var(--light-bg); padding: var(--padding-base); border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: left; transition: transform 0.3s, box-shadow 0.3s; }
+        .price-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        .price-card h3 { color: var(--primary-color); margin-bottom: 5px; }
+        .price { font-size: 2em; font-weight: bold; margin-bottom: 15px; color: var(--secondary-color); }
+        .price small { font-size: 0.5em; font-weight: normal; color: #777; }
+        .features-list { list-style: none; padding-left: 0; margin-bottom: 20px; }
+        .features-list li { padding: 5px 0; border-bottom: 1px solid #ddd; font-size: 0.9em; }
+        .call-button-mobile { display: block; position: fixed; right: var(--padding-base); bottom: 80px; background-color: #25d366; color: white; width: 50px; height: 50px; border-radius: 50%; text-align: center; line-height: 50px; font-size: 24px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); z-index: 999; text-decoration: none; }
+        .animate-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .visible { opacity: 1; transform: translateY(0); }
+
+
+        /* Header - Мобильді навигация */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .nav-item {
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 12px;
+            padding: 5px;
+            transition: all 0.3s;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-item i {
+            font-size: 18px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #6C63FF 0%, #5a52d5 100%);
+            color: white;
+            text-align: center;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" fill="white" opacity="0.05"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-right: 50px;
+            padding: 14px 32px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(255, 101, 132, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #ff4d6d;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 101, 132, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        /* Features */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features {
+            padding: 60px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(108, 99, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* Services */
+        .services {
+            padding: 60px 0;
+            background-color: #f8f9ff;
+            border-radius: 30px;
+            margin: 60px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-img {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .service-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Studio Section */
+        .studio {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #2A2D43 0%, #1a1d30 100%);
+            color: white;
+            border-radius: 30px;
+            margin: 60px 0;
+        }
+
+        .studio-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .studio-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .studio-text p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .studio-features {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .studio-features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .studio-features i {
+            color: var(--secondary);
+        }
+
+        .studio-video {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            height: 400px;
+            position: relative;
+        }
+
+        .studio-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+         /* Portfolio */
+        .portfolio {
+            padding: 60px 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .portfolio-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: white;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .video-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .video-placeholder h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .video-placeholder p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .video-placeholder:hover {
+            opacity: 0.9;
+        }
+
+        .portfolio-info {
+            padding: 20px;
+        }
+
+        .portfolio-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .portfolio-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 60px 0;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            height: 450px;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #6C63FF, #5a52d5);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .map-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .map-placeholder h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Studio Locations */
+:root {
+    --primary: #0072ff;
+    --accent: #00ffe1;
+  }
+
+  .locations {
+    padding: 60px 0;
+    background-color: #f8f9ff;
+    border-radius: 30px;
+    margin: 60px 0;
+  }
+
+  .locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .location-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .location-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .location-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--primary);
+  }
+
+  .location-info {
+    margin-bottom: 20px;
+  }
+
+  .location-info p {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .location-info i {
+    color: var(--primary);
+    margin-top: 4px;
+  }
+
+  /* Карта және әлеуметтік желілер қатар орналасады */
+  .location-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .btn {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 255, 225, 0.4);
+  }
+
+  /* Әлеуметтік желі иконкалары */
+  .social-icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .social-icons a {
+    color: #555;
+    background: #f0f0f5;
+    font-size: 1.2rem;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .social-icons a:hover {
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+    color: #fff;
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    .location-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+        /* CTA */
+        .cta {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 30px;
+            margin: 60px 0;
+        }
+
+        .cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        /* Call Button */
+        .call-button-mobile {
+            display: block;
+            position: fixed;
+            right: 20px;
+            bottom: 80px;
+            background-color: var(--success);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 60px;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .call-button-mobile:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Booking Button */
+        .booking-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .booking-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        /* Animations */
+        .animate-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 769px) {
+            body {
+                padding-bottom: 0;
+            }
+            
+            .mobile-nav {
+                position: sticky;
+                top: 0;
+                padding: 15px 0;
+                background-color: white;
+                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+                justify-content: center;
+                gap: 40px;
+                border-radius: 0;
+            }
+            
+            .nav-item {
+                font-size: 16px;
+                flex-grow: 0;
+                flex-direction: row;
+                gap: 8px;
+            }
+            
+            .nav-item i {
+                font-size: 20px;
+            }
+            
+            .call-button-mobile {
+                display: none;
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0;
+                border-radius: 0 0 20px 20px;
+                margin-bottom: 40px;
+                min-height: 60vh;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .features, .services, .studio, .portfolio, .contact, .locations, .cta {
+                padding: 40px 0;
+                margin: 40px 0;
+            }
+
+            .feature-card, .service-card, .location-card {
+                padding: 20px;
+            }
+
+            .studio-content, .contact-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .studio-video {
+                height: 300px;
+                order: -1;
+            }
+
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+
+            .map-container {
+                height: 350px;
+            }
+            
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <a href="#home" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Басты</span>
+        </a>
+        <a href="#services" class="nav-item">
+            <i class="fas fa-microphone"></i>
+            <span>Қызметтер</span>
+        </a>
+        <a href="#studio" class="nav-item">
+            <i class="fas fa-music"></i>
+            <span>Студия</span>
+        </a>
+        <a href="#portfolio" class="nav-item">
+            <i class="fas fa-video"></i>
+            <span>Мобилограф</span>
+        </a>
+        <a href="#locations" class="nav-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Орналасу</span>
+        </a>
+        <a href="#contact" class="nav-item">
+            <i class="fas fa-phone"></i>
+            <span>Байланыс</span>
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+     <section id="home" class="hero-section">
+            <div class="video-background">
+                <video autoplay muted loop playsinline poster="video-poster.jpg">
+                    <source src="./1.mp4" type="video/mp4"> 
+                    <source src="./1.webm" type="video/webm">
+                </video>
+            </div>
+            
+            <div class="hero-content animate-up">
+                <h1>Oz anindi jaz</h1>
+                <p class="tagline">Сіздің шығармашылығыңызды кәсіби деңгейге көтереміз.</p>
+                <a href="./333.html" class="btn">   Практика жасау</a>
+            </div>
+        </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Неге бізді таңдайды?</h2>
+                <p>Біз сізге ең жақсы дыбыс жазу тәжірибесін ұсынамыз</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <h3>Кәсіби жабдықтар</h3>
+                    <p>Тек кәсіби студиялық жабдықтарды пайдаланамыз, таза және анық дыбыс алу үшін.</p>
+                </div>
+                <div class="feature-card animate-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Тәжірибелі дикторлар</h3>
+                    <p>Әртүрлі дауыс тембрі мен оқу стилі бар кәсіби дикторлардың кең таңдауы.</p>
+                </div>
+                <div class="feature-card animate-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Жылдам өңдеу</h3>
+                    <p>Сапасын жоғалтпай, дыбысты ең қысқа мерзімде өңдеу және араластыру.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Біздің Қызметтер</h2>
+                <p>Әртүрлі мақсаттарға арналған дыбыс жазу және өңдеу қызметтерінің кең спектрі</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate-up">
+                    <div class="service-img">
+                        <i class="fas fa-ad"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Жарнамалық роликтер</h3>
+                        <p>Радио және теледидар жарнамасы, промо-роликтер үшін дауыс жазу.</p>
+                    </div>
+                </div>
+                <div class="service-card animate-up">
+                    <div class="service-img">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Бейнені дауыстау</h3>
+                        <p>Фильмдерді, деректі және корпоративтік бейнелерді кәсіби дауыстау.</p>
+                    </div>
+                </div>
+                <div class="service-card animate-up">
+                    <div class="service-img">
+                        <i class="fas fa-podcast"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Подкасттар</h3>
+                        <p>Подкасттарды, сұхбаттарды және басқа да аудиобағдарламаларды жазу және араластыру.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio Section -->
+    <section class="studio" id="studio">
+        <div class="container">
+            <div class="studio-content">
+                <div class="studio-text">
+                    <h2>Біздің заманауи студия</h2>
+                    <p>Sound Wave студиясы техниканың соңғы жетістіктерімен жабдықталған. Біз таза және сапалы дыбыс жазу үшін тамаша жағдайлар жасадық.</p>
+                    <p>Біздің студия кәсіби дыбыс оқшаулау, заманауи жабдықтар және жұмыс үшін ыңғайлы атмосфераны қамтиды.</p>
+                    <ul class="studio-features">
+                        <li><i class="fas fa-check"></i> Кәсіби дыбыс оқшаулау</li>
+                        <li><i class="fas fa-check"></i> Neumann, Rode және Shure микрофондары</li>
+                        <li><i class="fas fa-check"></i> Бөлменің акустикалық өңделуі</li>
+                        <li><i class="fas fa-check"></i> Клиенттер үшін ыңғайлы күту алаңы</li>
+                        <li><i class="fas fa-check"></i> Тұрақ және ыңғайлы кіру</li>
+                    </ul>
+                    <a href="#locations" class="btn" style="margin-top: 20px;">Орналасуын көру</a>
+                </div>
+                <div class="studio-video">
+                    <video autoplay muted loop playsinline>
+                        <source src="./2.mp4" type="video/mp4">
+                        <source src="./2.webm" type="video/webm">
+                        Сіздің браузеріңіз видео тегін қолдамайды.
+                    </video>
+                    <!-- Егер видео файлы болмаса, осы жолды пайдаланыңыз -->
+                    <!-- <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Студия туры</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section class="locations" id="locations">
+  <div class="container">
+    <div class="section-title">
+      <h2>Біздің Студиялар</h2>
+      <p>Екі ыңғайлы орналасқан студия</p>
+    </div>
+
+    <div class="locations-grid">
+      <!-- Студия 1 -->
+      <div class="location-card animate-up">
+        <h3>Студия 1</h3>
+        <div class="location-info">
+          <p><i class="fas fa-map-marker-alt"></i> <strong>Адрес:</strong> Сарыағаш, Ақниет, Азия магазин</p>
+          <p><i class="fas fa-map"></i> <strong>Район:</strong> Центральная часть города</p>
+        </div>
+
+        <div class="location-actions">
+          <a href="https://maps.google.com/maps?q=Сарыағаш%20Ақниет%20Азия%20магазин" target="_blank" class="btn">🗺️ Картада ашу</a>
+          <div class="social-icons">
+            <a href="https://instagram.com/saryagash_dauis_jazu" target="_blank" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://t.me/Nuralykz" target="_blank" title="Telegram">
+              <i class="fab fa-telegram"></i>
+            </a>
+            <a href="#" target="_blank" title="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Студия 2 -->
+      <div class="location-card animate-up">
+        <h3>Студия 2</h3>
+        <div class="location-info">
+          <p><i class="fas fa-map-marker-alt"></i> <strong>Адрес:</strong> г. Алматы, Аксай 1</p>
+          <p><i class="fas fa-map"></i> <strong>Район:</strong> рядом Ташкентски щоссе</p>
+        </div>
+
+        <div class="location-actions">
+          <a href="https://maps.google.com/maps?q=Алматы%20Аксай%201" target="_blank" class="btn">🗺️ Картада ашу</a>
+          <div class="social-icons">
+            <a href="https://instagram.com/saryagash_dauis_jazu" target="_blank" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://t.me/Nuralykz" target="_blank" title="Telegram">
+              <i class="fab fa-telegram"></i>
+            </a>
+            <a href="#" target="_blank" title="TikTok">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+   <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Біздің жұмыстар</h2>
+                <p>Соңғы жобаларымыздың үшеуі</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item animate-up">
+                    <div class="video-container">
+                        <video controls poster="./assets/images/video1-poster.jpg">
+                            <source src="./2.mp4" type="video/mp4">
+                            <source src="./2.webm" type="video/webm">
+                            Сіздің браузеріңіз видео тегін қолдамайды.
+                        </video>
+                        <div class="video-placeholder" onclick="playVideo(this)">
+                            <i class="fas fa-play-circle"></i>
+                            <h3>Жарнамалық ролик</h3>
+                            <p>Студия жарнамасы</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Жарнамалық ролик</h3>
+                        <p>Студияға арналған жарнамалық ролик</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item animate-up">
+                    <div class="video-container">
+                        <video controls poster="./assets/images/video2-poster.jpg">
+                            <source src="./3.mp4" type="video/mp4">
+                            <source src="./3.webm" type="video/webm">
+                            Сіздің браузеріңіз видео тегін қолдамайды.
+                        </video>
+                        <div class="video-placeholder" onclick="playVideo(this)">
+                            <i class="fas fa-play-circle"></i>
+                            <h3>Алтынғасыр</h3>
+                            <p>Тойдағы бейне</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Алтынғасыр</h3>
+                        <p>Тойдағы бейнелерден үзінді</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item animate-up">
+                    <div class="video-container">
+                        <video controls poster="./assets/images/video3-poster.jpg">
+                            <source src="./4.mp4" type="video/mp4">
+                            <source src="./4.webm" type="video/webm">
+                            Сіздің браузеріңіз видео тегін қолдамайды.
+                        </video>
+                        <div class="video-placeholder" onclick="playVideo(this)">
+                            <i class="fas fa-play-circle"></i>
+                            <h3>Love history</h3>
+                            <p>Love history</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Love history</h3>
+                        <p>Жастардың бақыт кешінен</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Байланыс және орналасуымыз</h2>
+                <p>Бізбен байланысыңыз немесе бізді көріңіз</p>
+            </div>
+            
+            <div class="contact-content">
+                <form class="contact-form animate-up" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Аты-жөніңіз</label>
+                        <input type="text" id="name" placeholder="Атыңызды енгізіңіз" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон нөмірі</label>
+                        <input type="tel" id="phone" placeholder="+7 (777) 123-45-67" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Хабарлама</label>
+                        <textarea id="message" placeholder="Хабарламаңызды немесе брондау сұранысыңызды енгізіңіз" rows="5" required></textarea>
+                    </div>
+                    <button type="button" id="whatsappSubmit" class="btn">WhatsApp-ке жіберу</button>
+                </form>
+
+                <div class="map-container animate-up">
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        marginheight="0" 
+                        marginwidth="0" 
+                        src="https://maps.google.com/maps?q=Сарыағаш%20Ақниет%20Азия%20магазин&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Жазуға дайынсыз ба?</h2>
+            <p>Бізбен бүгін хабарласыңыз, жобаңызды талқылаңыз !</p>
+            <a href="tel:+77005733615" class="btn">Қазір қоңырау шал</a>
+        </div>
+    </section>
+
+    <!-- Booking Button Mobile -->
+    <a href="https://wa.me/77005733615?text=Сәлеметсіз бе! Мен Sound Wave студиясына брондау жасағым келеді." target="_blank" class="booking-button" style="position: fixed; right: 20px; bottom: 80px; z-index: 999;">
+        <i class="fab fa-whatsapp"></i>
+        Брондау
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('section');
+            const contactForm = document.getElementById('contactForm');
+            const whatsappSubmit = document.getElementById('whatsappSubmit');
+            const animatedElements = document.querySelectorAll('.animate-up');
+            const youtubePlaceholder = document.querySelector('.youtube-placeholder');
+            
+            // 1. Скролл кезінде белсенді навигация элементін көрсету
+            const updateActiveLink = () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') && item.getAttribute('href').includes(current)) {
+                        item.classList.add('active');
+                    }
+                });
+            };
+            
+            // 2. Скролл кезінде анимацияларды іске қосу
+            const checkAnimation = () => {
+                animatedElements.forEach(el => {
+                    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                        el.classList.add('visible');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', updateActiveLink);
+            window.addEventListener('scroll', checkAnimation);
+            updateActiveLink(); 
+            checkAnimation();
+
+            // 3. WhatsApp формасын өңдеу
+            whatsappSubmit.addEventListener('click', () => {
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const message = document.getElementById('message').value;
+                
+                if (name && phone && message) {
+                    const whatsappMessage = `Сәлеметсіз бе! Менің атым ${name}. Телефоным: ${phone}. Хабарлама: ${message}`;
+                    const encodedMessage = encodeURIComponent(whatsappMessage);
+                    const whatsappURL = `https://wa.me/77005733615?text=${encodedMessage}`;
+                    
+                    window.open(whatsappURL, '_blank');
+                } else {
+                    alert('Барлық өрістерді толтырыңыз!');
+                }
+            });
+
+            // 4. YouTube видеосын жүктеу
+            youtubePlaceholder.addEventListener('click', () => {
+                if (!youtubePlaceholder.classList.contains('active')) {
+                    const videoId = youtubePlaceholder.dataset.videoid;
+                    const iframe = youtubePlaceholder.querySelector('iframe');
+                    
+                    iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&controls=1&showinfo=0&autoplay=1`;
+                    
+                    youtubePlaceholder.classList.add('active');
+                    iframe.style.display = 'block';
+                }
+            });
+
+            // 5. Навигация элементтеріне тегіс скролл қосу
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    const targetId = item.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+// Видео ойнату функциясы
+       // Видео ойнату функциясы
+  function playVideo(element) {
+    const videoContainer = element.parentElement;
+    const video = videoContainer.querySelector('video');
+    const placeholder = videoContainer.querySelector('.video-placeholder');
+    
+    // Фото жасырылады, видео ойнатылады
+    placeholder.style.display = 'none';
+    video.style.display = 'block';
+    video.play();
+
+    // Видео біткен соң фотоны қайта шығару
+    video.addEventListener('ended', () => {
+      video.pause();
+      video.currentTime = 0; // басына қайтару
+      video.style.display = 'none';
+      placeholder.style.display = 'block';
+    }, { once: true }); // тек бір рет тыңдайды
+  }
+
+
+
+    </script>
+</body>
+</html>
